@@ -1,0 +1,14 @@
+.elements {
+  padding: 51px 0 67px 0;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 20px;
+  column-gap: 17px;
+  font-size: 0;
+}
+
+@media (max-width: 880px) {
+  .elements {
+    padding: 36px 19px 48px 19px;
+  }
+}

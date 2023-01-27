@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="портфолио Диковой Надежды на Яндекс Практикуме">
+  <meta name="keywords" content="html, css, js">
+  <meta name="author" content="Дикова Надежда">
+  <link rel="stylesheet" href="./pages/index.css">
+  <title>Mesto</title>
+</head>
+
+<body class="page">
+  <header class="header">
+    <img class="header__logo" src="./images/logo.svg" alt="Логотип">
+  </header>
+  <main class="content">
+    <section class="profile">
+      <img class="profile__avatar" src="./images/Avatar.png" alt="Фото-аватар">
+      <div class="profile__info">
+        <div class="profile__name-container">
+          <h1 class="profile__name">Жак-Ив Кусто</h1>
+          <button class="profile__button-edit" type="button">
+            <img class="profile__button-edit-img" src="./images/EditButton.svg" alt="Кнопка изменить">
+          </button>
+        </div>
+        <p class="profile__description">Исследователь океана</p>
+      </div>
+      <button class="profile__button-add" type="button"></button>
+    </section>
+    <section class="elements">
+      <div class="element">
+        <img class="element__img" src="./images/Karachaevsk.png" alt="Карачаевск">
+        <div class="element__caption">
+          <h3 class="element__title">Карачаевск</h3>
+          <img class="element__like" src="./images/Like.svg" alt="Сердце">
+        </div>
+      </div>
+      <div class="element">
+        <img class="element__img" src="./images/MountElbrus.png" alt="Гора Эльбрус">
+        <div class="element__caption">
+          <h3 class="element__title">Гора Эльбрус</h3>
+          <img class="element__like" src="./images/Like.svg" alt="Сердце">
+        </div>
+      </div>
+      <div class="element">
+        <img class="element__img" src="./images/Dombai.png" alt="Домбай">
+        <div class="element__caption">
+          <h3 class="element__title">Домбай</h3>
+          <img class="element__like" src="./images/Like.svg" alt="Сердце">
+        </div>
+      </div>
+      <div class="element">
+        <img class="element__img" src="./images/MountElbrus.png" alt="Гора Эльбрус">
+        <div class="element__caption">
+          <h3 class="element__title">Гора Эльбрус</h3>
+          <img class="element__like" src="./images/Like.svg" alt="Сердце">
+        </div>
+      </div>
+      <div class="element">
+        <img class="element__img" src="./images/Dombai.png" alt="Домбай">
+        <div class="element__caption">
+          <h3 class="element__title">Домбай</h3>
+          <img class="element__like" src="./images/Like.svg" alt="Сердце">
+        </div>
+      </div>
+      <div class="element">
+        <img class="element__img" src="./images/Karachaevsk.png" alt="Карачаевск">
+        <div class="element__caption">
+          <h3 class="element__title">Карачаево-Черкесия</h3>
+          <img class="element__like" src="./images/Like.svg" alt="Сердце">
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer">
+    <p class="footer__copyright">© 2023 Mesto Russia</p>
+  </footer>
+
+  <section class="popup">
+    <div class="popup__container">
+      <button class="popup__close" type="button"></button>
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <form class="popup__form">
+        <fieldset class="popup__fieldset">
+          <div class="popup__form-name">
+            <input class="popup__input-name" type="text" name="name" value="Жак-Ив Кусто" required>
+          </div>
+          <div class="popup__form-description">
+            <input class="popup__input-description" type="text" name="description" value="Исследователь океана"
+              required>
+          </div>
+        </fieldset>
+      </form>
+      <button class="popup__save" type="button">Сохранить</button>
+    </div>
+  </section>
+  <script src="./scripts/index.js"></script>
+</body>
+
+</html>

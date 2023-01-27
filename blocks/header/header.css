@@ -1,0 +1,20 @@
+.header {
+  padding: 0 0 40px 0;
+}
+
+.header::after {
+  content: '';
+  margin: 41px 0 0 0;
+  opacity: 0.7;
+  border: 1px solid #545454;
+  display: block;
+}
+
+@media (max-width: 880px) {
+  .header::after {
+    margin: 31px 0 0 0;
+  }
+  .header {
+    padding: 28px 0 38px 0;
+  }
+}
