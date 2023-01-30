@@ -1,7 +1,0 @@
-.popup__form-description::after {
-  content: '';
-  opacity: 0.2;
-  border: 1px solid #000000;
-  display: block;
-  margin: 13px 0 0 0;
-}

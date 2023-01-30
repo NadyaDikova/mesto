@@ -8,3 +8,10 @@
   width: 100%;
   position: relative;
 }
+
+@media (max-width: 500px) {
+  .popup__container {
+    padding: 25px 22px;
+    max-width: 282px;
+  }
+}

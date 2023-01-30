@@ -5,9 +5,12 @@
   row-gap: 20px;
   column-gap: 17px;
   font-size: 0;
+  max-width: 880px;
+  margin: 0 auto;
+  justify-content: center;
 }
 
-@media (max-width: 880px) {
+@media (max-width: 425px) {
   .elements {
     padding: 36px 19px 48px 19px;
   }
