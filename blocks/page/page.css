@@ -11,24 +11,7 @@
 @media (max-width: 1024px) {
   .page {
     max-width: 1024px;
-  }
-}
-
-@media (max-width: 950px) {
-  .page {
     padding: 0 20px;
-  }
-}
-
-@media (max-width: 880px) {
-  .page {
-    max-width: 880px;
-  }
-}
-
-@media (max-width: 768px) {
-  .page {
-    max-width: 768px;
   }
 }
 
