@@ -1,0 +1,10 @@
+.popup__container-picture {
+  max-width: 100%;
+  position: relative;
+}
+
+@media (max-width: 500px) {
+  .popup__container-picture {
+    max-width: 282px;
+  }
+}

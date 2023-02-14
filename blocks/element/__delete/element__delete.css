@@ -1,18 +1,19 @@
-.element__like {
+.element__delete {
   margin: 0 0 0 auto;
-  width: 22px;
+  width: 18px;
   height: 19px;
   align-self: center;
   cursor: pointer;
   border: none;
   background-color: transparent;
   padding: 0;
-  background: url(../../../images/like.svg);
+  position: absolute;
+  top: 20px;
+  left: 244px;
+  background: url(../../../images/delete-button.svg);
 }
 
-.element__like:hover {
+.element__delete:hover {
   opacity: 0.5;
   transition: .5s;
 }
-
-
