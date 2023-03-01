@@ -1,4 +1,5 @@
-.popup__input-description {
+.popup__input_type_error {
+  border-bottom: 1px solid #FF0000;
   font-size: 14px;
   line-height: 17px;
   border: none;

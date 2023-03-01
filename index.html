@@ -39,12 +39,16 @@
     <div class="popup__container">
       <button class="popup__close" type="button"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__form" name="form">
+      <form novalidate class="popup__form" name="form-edit">
         <fieldset class="popup__fieldset">
-          <input class="popup__input-name" type="text" name="name" value="Жак-Ив Кусто" required>
-          <input class="popup__input-description" type="text" name="description" value="Исследователь океана" required>
+          <input id="nameEdit-input" class="popup__input popup__input-name" type="text" name="name" value="Жак-Ив Кусто"
+            minlength="2" maxlength="40" required>
+          <span class="popup__error nameEdit-input-error"></span>
+          <input id="jobEdit-input" class="popup__input popup__input-description" type="text" name="description"
+            value="Исследователь океана" minlength="2" maxlength="200" required>
+          <span class="popup__error jobEdit-input-error"></span>
         </fieldset>
-        <button class="popup__save">Сохранить</button>
+        <button class="popup__button">Сохранить</button>
       </form>
     </div>
   </div>
@@ -52,13 +56,16 @@
     <div class="popup__container">
       <button class="popup__close" type="button"></button>
       <h2 class="popup__title">Новое место</h2>
-      <form class="popup__form" name="form">
+      <form novalidate class="popup__form" name="form-add">
         <fieldset class="popup__fieldset">
-          <input class="popup__input-name" type="text" name="name" value="" placeholder="Название" required>
-          <input class="popup__input-description" type="url" name="description" value=""
+          <input id="nameAdd-input" class="popup__input popup__input-name" type="text" name="name" value=""
+            placeholder="Название" minlength="2" maxlength="30" required>
+          <span class="popup__error nameAdd-input-error"></span>
+          <input id="urlEdit-input" class="popup__input popup__input-description" type="url" name="description" value=""
             placeholder="Ссылка на картинку" required>
+          <span class="popup__error urlEdit-input-error"></span>
         </fieldset>
-        <button class="popup__save">Создать</button>
+        <button class="popup__button">Создать</button>
       </form>
     </div>
   </div>
@@ -81,6 +88,7 @@
       </div>
     </div>
   </template>
+  <script src="./scripts/validate.js"></script>
   <script src="./scripts/cards.js"></script>
   <script src="./scripts/index.js"></script>
 </body>

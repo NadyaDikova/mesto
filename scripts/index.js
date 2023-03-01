@@ -26,7 +26,6 @@ const closeButtonPicture = popupPicture.querySelector('.popup__close'); //кно
 const popupImg = popupPicture.querySelector('.popup__img'); //картинка в popup picture
 const caption = popupPicture.querySelector('.popup__figure-caption'); //название картинки в popup picture
 
-
 //функция создания карточек
 function getCard (element) {
 
@@ -51,7 +50,7 @@ function getCard (element) {
 
 //отрисовка карточек
 function renderCard (wrap, element) {
-  wrap.append(getCard(element));
+  wrap.prepend(getCard(element));
 }
 
 //перебор массива (карточек) и его отрисовка
@@ -62,10 +61,14 @@ initialCards.forEach((element) => {
 //функции открытия/закрытия popup's
 function openPopup (popup) {
   popup.classList.add('popup_opened');
+  document.addEventListener("keydown", handleEscClick);
+  popup.addEventListener("mousedown", handleOverlyClick);
 }
 
 function closePopup (popup) {
   popup.classList.remove('popup_opened');
+  document.addEventListener("keydown", handleEscClick);
+  popup.addEventListener("mousedown", handleOverlyClick);
 }
 
 //функция присваивания названия имени и профессии в верстке и popup edit
@@ -89,16 +92,16 @@ function getDelete (evt) {
 }
 
  //функция создания лайка
-function getLike () {
-  event.target.classList.toggle('element__like_active');
+function getLike (evt) {
+  evt.target.classList.toggle('element__like_active');
 }
 
 //функция появления и заполнения данными popup picture
-function getPopopImg () {
+function getPopopImg (evt) {
   openPopup(popupPicture);
-  popupImg.src = event.target.src;
-  popupImg.alt = event.target.alt;
-  caption.innerText = event.target.alt;
+  popupImg.src = evt.target.src;
+  popupImg.alt = evt.target.alt;
+  caption.innerText = evt.target.alt;
 };
 
 // функция добавления новой карточки и сброс формы до изначального состояния
@@ -108,6 +111,22 @@ function getNewCard (evt) {
   wrapper.prepend(card);
   closePopup(popupAdd);
   formElementAdd.reset();
+}
+
+//функция закрытия попапа при клике на оверлей
+function handleOverlyClick (evt) {
+  if (evt.target === evt.currentTarget) {
+    const popupOpened = document.querySelector('.popup_opened');
+    closePopup(popupOpened);
+}
+}
+
+//функция закрытия попапа при esc
+function handleEscClick(evt) {
+  if (evt.key === "Escape") {
+    const popupOpened = document.querySelector('.popup_opened');
+    return closePopup(popupOpened);
+  }
 }
 
 //слушатели-обработчики

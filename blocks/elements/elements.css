@@ -7,7 +7,6 @@
   font-size: 0;
   max-width: 880px;
   margin: 0 auto;
-  justify-content: center;
 }
 
 @media (max-width: 425px) {
