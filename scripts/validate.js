@@ -1,4 +1,4 @@
-const enableValidation = ({
+const validateSettings = ({
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button',
@@ -8,27 +8,27 @@ const enableValidation = ({
 });
 
 // функция добавляет класс с ошибкой
-const showInputError = (formElement, inputElement, errorMessage) => {
+const showInputError = (formElement, inputElement, errorMessage, settings) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add(enableValidation.inputErrorClass);
+  inputElement.classList.add(settings.inputErrorClass);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add(enableValidation.errorClass);
+  errorElement.classList.add(settings.errorClass);
 };
 
 // функция удаляет класс с ошибкой
-const hideInputError = (formElement, inputElement) => {
+const hideInputError = (formElement, inputElement, settings) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove(enableValidation.inputErrorClass);
-  errorElement.classList.remove(enableValidation.errorClass);
+  inputElement.classList.remove(settings.inputErrorClass);
+  errorElement.classList.remove(settings.errorClass);
   errorElement.textContent = '';
 };
 
 // функция проверяет ОДНО поле на валидность
-const checkInputValidity = (formElement, inputElement) => {
+const checkInputValidity = (formElement, inputElement, settings) => {
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+    showInputError(formElement, inputElement, inputElement.validationMessage, settings);
   } else {
-    hideInputError(formElement, inputElement);
+    hideInputError(formElement, inputElement, settings);
   }
 };
 
@@ -40,36 +40,43 @@ function hasInvalidInput (inputList) {
 }
 
 // функция вкл/выкл кнопки при валидности
-function toggleButtonState (inputList, buttonElement) {
+function toggleButtonState (inputList, buttonElement, settings) {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add(enableValidation.inactiveButtonClass);
+    buttonElement.setAttribute('disabled', '');
+    buttonElement.classList.add(settings.inactiveButtonClass);
   } else {
-    buttonElement.classList.remove(enableValidation.inactiveButtonClass);
+    buttonElement.removeAttribute('disabled');
+    buttonElement.classList.remove(settings.inactiveButtonClass);
   }
 }
 
 //функция, которая добавляет слушатели всем инпутам внутри формы
-const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll(enableValidation.inputSelector));
-  const buttonElement = formElement.querySelector(enableValidation.submitButtonSelector);
-  toggleButtonState(inputList, buttonElement);
+const setEventListeners = (formElement, settings) => {
+  const inputList = Array.from(formElement.querySelectorAll(settings.inputSelector));
+  const buttonElement = formElement.querySelector(settings.submitButtonSelector);
+  toggleButtonState(inputList, buttonElement, settings);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', function () {
-      checkInputValidity(formElement, inputElement);
-      toggleButtonState(inputList, buttonElement);
+      checkInputValidity(formElement, inputElement, settings);
+      toggleButtonState(inputList, buttonElement, settings);
     });
+  });
+  formElement.reset();
+  formElement.addEventListener('reset', () => {
+    setTimeout(() => {
+      toggleButtonState(inputList, buttonElement, settings), 0 });
   });
 };
 
 //функция, которая находит и переберает все формы на странице
-const formEnableValidation = () => {
-  const formList = Array.from(document.querySelectorAll(enableValidation.formSelector));
+const enableValidation = (settings) => {
+  const formList = Array.from(document.querySelectorAll(settings.formSelector));
   formList.forEach((formElement) => {
     formElement.addEventListener("submit", (evt) => {
       evt.preventDefault();
     });
-    setEventListeners(formElement);
+    setEventListeners(formElement, settings);
   });
 };
 
-formEnableValidation();
+enableValidation(validateSettings);

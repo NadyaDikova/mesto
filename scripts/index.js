@@ -5,10 +5,11 @@ const editButton = document.querySelector('.profile__button-edit'); //кнопк
 const name = document.querySelector('.profile__name'); // первоначальное имя в верстке
 const description = document.querySelector('.profile__description'); // первоначальная профессия в верстке
 const popup = document.querySelector('.popup'); // popup
+const cardTemplate = document.querySelector('#card').content; // Template
+const closeButtons = document.querySelectorAll('.popup__close'); // кнопка закрыть всех попапов
 
 //popup edit
 const popupEdit = document.querySelector('.popup_type_edit'); // форма popup edit
-const closeButtonEdit = popupEdit.querySelector('.popup__close'); //кнопка закрыть в popup edit
 const formElementEdit = popupEdit.querySelector('.popup__form'); // форма в popup edit
 const nameInputEdit = formElementEdit.querySelector('.popup__input-name'); // input имя в popup edit
 const jobInputEdit = formElementEdit.querySelector('.popup__input-description'); // input профессия в popup edit
@@ -16,20 +17,17 @@ const jobInputEdit = formElementEdit.querySelector('.popup__input-description');
 //popup add
 const popupAdd = document.querySelector('.popup_type_add'); // форма popup add
 const formElementAdd = popupAdd.querySelector('.popup__form'); // форма в popup add
-const closeButtonAdd = popupAdd.querySelector('.popup__close'); //кнопка закрыть в popup add
 const addTitle = popupAdd.querySelector('.popup__input-name'); // input имя в popup add
 const addDescription = popupAdd.querySelector('.popup__input-description'); // input url в popup add
 
 //popup picture
 const popupPicture = document.querySelector('.popup_type_picture'); // форма popup picture
-const closeButtonPicture = popupPicture.querySelector('.popup__close'); //кнопка закрыть в popup picture
 const popupImg = popupPicture.querySelector('.popup__img'); //картинка в popup picture
 const caption = popupPicture.querySelector('.popup__figure-caption'); //название картинки в popup picture
 
 //функция создания карточек
 function getCard (element) {
 
-  const cardTemplate = document.querySelector('#card').content;
   const newElement = cardTemplate.querySelector('.element').cloneNode(true);
   const title = newElement.querySelector('.element__title');
   const img = newElement.querySelector('.element__img');
@@ -67,8 +65,8 @@ function openPopup (popup) {
 
 function closePopup (popup) {
   popup.classList.remove('popup_opened');
-  document.addEventListener("keydown", handleEscClick);
-  popup.addEventListener("mousedown", handleOverlyClick);
+  document.removeEventListener("keydown", handleEscClick);
+  popup.removeEventListener("mousedown", handleOverlyClick);
 }
 
 //функция присваивания названия имени и профессии в верстке и popup edit
@@ -116,8 +114,7 @@ function getNewCard (evt) {
 //функция закрытия попапа при клике на оверлей
 function handleOverlyClick (evt) {
   if (evt.target === evt.currentTarget) {
-    const popupOpened = document.querySelector('.popup_opened');
-    closePopup(popupOpened);
+    closePopup(evt.target);
 }
 }
 
@@ -129,13 +126,16 @@ function handleEscClick(evt) {
   }
 }
 
+//перебор кнопки "крестик" всех попапов и создание обработчиков закрытия на каждый
+closeButtons.forEach((button) => {
+  const popup = button.closest('.popup');
+  button.addEventListener('click', () => closePopup(popup));
+});
+
+
 //слушатели-обработчики
 editButton.addEventListener('click', handleEditButtonClick );
 addButton.addEventListener('click', function () {openPopup(popupAdd);});
-
-closeButtonEdit.addEventListener('click', function () {closePopup(popupEdit);});
-closeButtonAdd.addEventListener('click', function () {closePopup(popupAdd);});
-closeButtonPicture.addEventListener('click', function () {closePopup(popupPicture);});
 
 formElementEdit.addEventListener('submit', handleFormEdit);
 formElementAdd.addEventListener('submit', getNewCard);
