@@ -1,3 +1,6 @@
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
+
 const wrapper = document.querySelector('.elements'); //обертка всех карточек
 const template = document.querySelector('.card'); // шаблон
 const addButton = document.querySelector('.profile__button-add'); //кнопка "+"
@@ -20,44 +23,52 @@ const formElementAdd = popupAdd.querySelector('.popup__form'); // форма в 
 const addTitle = popupAdd.querySelector('.popup__input-name'); // input имя в popup add
 const addDescription = popupAdd.querySelector('.popup__input-description'); // input url в popup add
 
-//popup picture
-const popupPicture = document.querySelector('.popup_type_picture'); // форма popup picture
-const popupImg = popupPicture.querySelector('.popup__img'); //картинка в popup picture
-const caption = popupPicture.querySelector('.popup__figure-caption'); //название картинки в popup picture
+export const initialCards = [
+  {
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
 
-//функция создания карточек
-function getCard (element) {
-
-  const newElement = cardTemplate.querySelector('.element').cloneNode(true);
-  const title = newElement.querySelector('.element__title');
-  const img = newElement.querySelector('.element__img');
-
-  const likeButton = newElement.querySelector('.element__like');
-  const deleteButton = newElement.querySelector('.element__delete');
-
-  title.textContent = element.name;
-  img.src = element.link;
-  img.alt = element.name;
-
-  img.addEventListener ('click', getPopopImg); // popup img
-  likeButton.addEventListener('click', getLike); // like
-  deleteButton.addEventListener('click', getDelete); // delete
-
-  return newElement;
-}
-
-//отрисовка карточек
-function renderCard (wrap, element) {
-  wrap.prepend(getCard(element));
-}
-
-//перебор массива (карточек) и его отрисовка
-initialCards.forEach((element) => {
-  renderCard(wrapper, element);
+const validateSettings = ({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
 });
 
+//для каждой проверяемой формы создаем экземпляр класса
+const validationEdit = new FormValidator (validateSettings, formElementEdit);
+const validationAdd = new FormValidator (validateSettings, formElementAdd);
+
+//включает валидацию форм
+validationEdit.enableValidation();
+validationAdd.enableValidation();
+
 //функции открытия/закрытия popup's
-function openPopup (popup) {
+export function openPopup (popup) {
   popup.classList.add('popup_opened');
   document.addEventListener("keydown", handleEscClick);
   popup.addEventListener("mousedown", handleOverlyClick);
@@ -84,23 +95,11 @@ function handleFormEdit (evt) {
   closePopup(popupEdit);
 }
 
-// функция удаления карточки
-function getDelete (evt) {
-  evt.target.closest('.element').remove();
+//функция создания новой карточки
+function getCard (card) {
+  const newCard = new Card (card, '#card').generateCard();
+  return newCard;
 }
-
- //функция создания лайка
-function getLike (evt) {
-  evt.target.classList.toggle('element__like_active');
-}
-
-//функция появления и заполнения данными popup picture
-function getPopopImg (evt) {
-  openPopup(popupPicture);
-  popupImg.src = evt.target.src;
-  popupImg.alt = evt.target.alt;
-  caption.innerText = evt.target.alt;
-};
 
 // функция добавления новой карточки и сброс формы до изначального состояния
 function getNewCard (evt) {
@@ -131,7 +130,6 @@ closeButtons.forEach((button) => {
   const popup = button.closest('.popup');
   button.addEventListener('click', () => closePopup(popup));
 });
-
 
 //слушатели-обработчики
 editButton.addEventListener('click', handleEditButtonClick );

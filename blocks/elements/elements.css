@@ -9,6 +9,12 @@
   margin: 0 auto;
 }
 
+@media (max-width: 919px) {
+  .elements {
+    justify-content: center;
+  }
+}
+
 @media (max-width: 425px) {
   .elements {
     padding: 36px 19px 48px 19px;
