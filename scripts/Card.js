@@ -1,10 +1,13 @@
-import {openPopup, initialCards} from "./index.js";
-
 export default class Card {
-  constructor (data, templateSelector) {
+  constructor (data, templateSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
+
+    this._popupPicture = document.querySelector('.popup_type_picture'); // форма popup picture
+    this._popupImg = this._popupPicture.querySelector('.popup__img'); //картинка в popup picture
+    this._caption = this._popupPicture.querySelector('.popup__figure-caption'); //название картинки в popup picture
 }
 
 //получаем разметку
@@ -16,12 +19,12 @@ _getTemplate () {
 //вставляем данные в разметку и подготовим карточку к публикации
 generateCard () {
   this._element = this._getTemplate();
-  this._setEventListeners();
 
   this._cardImage = this._element.querySelector('.element__img');
   this._cardName = this._element.querySelector('.element__title');
   this._likeButton = this._element.querySelector('.element__like');
   this._deleteButton = this._element.querySelector('.element__delete');
+  this._setEventListeners();
 
   this._cardImage.src = this._link;
   this._cardImage.alt = this._name;
@@ -31,55 +34,41 @@ generateCard () {
 }
 
 //лайк карточки
-_getLike() {
+_toggleLike() {
   this._likeButton.classList.toggle('element__like_active');
 }
 
 //удаление карточки
-_getRemove() {
+_removeCard() {
   this._element.remove();
   this._element = null;
 }
 
 
-_getPopopImg () {
-  const popupPicture = document.querySelector('.popup_type_picture');
-  const popupImg = popupPicture.querySelector('.popup__img');
-  const caption = popupPicture.querySelector('.popup__figure-caption');
+_handleImageClick () {
+  openPopup(this._popupPicture);
 
-  openPopup(popupPicture);
-
-  popupImg.src = this._element.querySelector('.element__img').src;
-  popupImg.alt = this._element.querySelector('.element__img').alt;
-  caption.innerText = this._element.querySelector('.element__img').alt;
+  this._popupImg.src = this._link;
+  this._popupImg.alt = this._name;
+  this._caption.innerText = this._name;
 }
 
 
 _setEventListeners () {
   //удаление карточки
-  this._element.querySelector('.element__delete').addEventListener('click', () => {
-    this._getRemove();
+  this._deleteButton.addEventListener('click', () => {
+    this._removeCard();
   });
 
   //лайк карточки
-  this._element.querySelector('.element__like').addEventListener('click', () => {
-    this._getLike();
+  this._likeButton.addEventListener('click', () => {
+    this._toggleLike();
   });
 
   //открытие попапа с картинкой
-  this._element.querySelector('.element__img').addEventListener('click', () => {
-    this._getPopopImg();
+  this._cardImage.addEventListener('click', () => {
+    this._handleCardClick(this._name, this._link);
   });
 
 }
 }
-
-  //перебор массива (карточек) и его отрисовка
-  initialCards.forEach ((item) => {
-    const card = new Card(item, '#card');
-
-    const cardElement = card.generateCard();
-    document.querySelector('.elements').append(cardElement);
-  });
-
-

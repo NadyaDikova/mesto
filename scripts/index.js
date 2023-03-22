@@ -13,15 +13,20 @@ const closeButtons = document.querySelectorAll('.popup__close'); // кнопка
 
 //popup edit
 const popupEdit = document.querySelector('.popup_type_edit'); // форма popup edit
-const formElementEdit = popupEdit.querySelector('.popup__form'); // форма в popup edit
+const formElementEdit = document.forms['form-edit']; // форма в popup edit
 const nameInputEdit = formElementEdit.querySelector('.popup__input-name'); // input имя в popup edit
 const jobInputEdit = formElementEdit.querySelector('.popup__input-description'); // input профессия в popup edit
 
 //popup add
 const popupAdd = document.querySelector('.popup_type_add'); // форма popup add
-const formElementAdd = popupAdd.querySelector('.popup__form'); // форма в popup add
+const formElementAdd = document.forms['form-add']; // форма в popup add
 const addTitle = popupAdd.querySelector('.popup__input-name'); // input имя в popup add
 const addDescription = popupAdd.querySelector('.popup__input-description'); // input url в popup add
+
+//popup picture
+const popupPicture = document.querySelector('.popup_type_picture'); // форма popup picture
+const popupImg = popupPicture.querySelector('.popup__img'); //картинка в popup picture
+const caption = popupPicture.querySelector('.popup__figure-caption'); //название картинки в popup picture
 
 export const initialCards = [
   {
@@ -67,6 +72,25 @@ const validationAdd = new FormValidator (validateSettings, formElementAdd);
 validationEdit.enableValidation();
 validationAdd.enableValidation();
 
+//функция создания новой карточки
+function createCard (card) {
+  const cardElement = new Card (card, '#card', handleCardClick).generateCard();
+  return cardElement;
+}
+
+//перебор массива (карточек) и его отрисовка
+initialCards.forEach ((item) => {
+  const cardElement = createCard(item);
+  wrapper.append(cardElement);
+});
+
+function handleCardClick(name, link) {
+  popupImg.src = link;
+  popupImg.alt = name;
+  caption.textContent = name;
+  openPopup(popupPicture);
+}
+
 //функции открытия/закрытия popup's
 export function openPopup (popup) {
   popup.classList.add('popup_opened');
@@ -95,16 +119,10 @@ function handleFormEdit (evt) {
   closePopup(popupEdit);
 }
 
-//функция создания новой карточки
-function getCard (card) {
-  const newCard = new Card (card, '#card').generateCard();
-  return newCard;
-}
-
 // функция добавления новой карточки и сброс формы до изначального состояния
 function getNewCard (evt) {
   evt.preventDefault();
-  const card = getCard({name:addTitle.value, link:addDescription.value});
+  const card = createCard({name:addTitle.value, link:addDescription.value});
   wrapper.prepend(card);
   closePopup(popupAdd);
   formElementAdd.reset();
@@ -137,8 +155,3 @@ addButton.addEventListener('click', function () {openPopup(popupAdd);});
 
 formElementEdit.addEventListener('submit', handleFormEdit);
 formElementAdd.addEventListener('submit', getNewCard);
-
-
-
-
-
