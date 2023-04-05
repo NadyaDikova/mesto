@@ -12,7 +12,5 @@
 
 .element__like:hover {
   opacity: 0.5;
-  transition: .5s;
+  transition: 0.5s;
 }
-
-

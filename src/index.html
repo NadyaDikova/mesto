@@ -2,34 +2,34 @@
 <html lang="ru">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="портфолио Диковой Надежды на Яндекс Практикуме">
-  <meta name="keywords" content="html, css, js">
-  <meta name="author" content="Дикова Надежда">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="портфолио Диковой Надежды на Яндекс Практикуме" />
+  <meta name="keywords" content="html, css, js" />
+  <meta name="author" content="Дикова Надежда" />
   <title>Mesto</title>
 </head>
 
 <body class="page">
   <header class="header">
-    <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="Логотип">
+    <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="Логотип" />
   </header>
   <main class="content">
     <section class="profile">
-      <img class="profile__avatar" src="<%=require('./images/avatar.png')%>" alt="Фото-аватар">
+      <img class="profile__avatar" src="<%=require('./images/avatar.png')%>" alt="Фото-аватар" />
       <div class="profile__info">
         <div class="profile__name-container">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <button class="profile__button-edit" type="button">
-            <img class="profile__button-edit-img" src="<%=require('./images/edit_button.svg')%>" alt="Кнопка изменить">
+            <img class="profile__button-edit-img" src="<%=require('./images/edit_button.svg')%>"
+              alt="Кнопка изменить" />
           </button>
         </div>
         <p class="profile__description">Исследователь океана</p>
       </div>
       <button class="profile__button-add" type="button"></button>
     </section>
-    <section class="elements">
-    </section>
+    <section class="elements"></section>
   </main>
   <footer class="footer">
     <p class="footer__copyright">© 2023 Mesto Russia</p>
@@ -41,10 +41,10 @@
       <form novalidate class="popup__form" name="form-edit">
         <fieldset class="popup__fieldset">
           <input id="nameEdit-input" class="popup__input popup__input-name" type="text" name="name" value="Жак-Ив Кусто"
-            minlength="2" maxlength="40" required>
+            minlength="2" maxlength="40" required />
           <span class="popup__error nameEdit-input-error"></span>
           <input id="jobEdit-input" class="popup__input popup__input-description" type="text" name="aboutSelf"
-            value="Исследователь океана" minlength="2" maxlength="200" required>
+            value="Исследователь океана" minlength="2" maxlength="200" required />
           <span class="popup__error jobEdit-input-error"></span>
         </fieldset>
         <button class="popup__button">Сохранить</button>
@@ -58,10 +58,10 @@
       <form novalidate class="popup__form" name="form-add">
         <fieldset class="popup__fieldset">
           <input id="nameAdd-input" class="popup__input popup__input-name" type="text" name="name" value=""
-            placeholder="Название" minlength="2" maxlength="30" required>
+            placeholder="Название" minlength="2" maxlength="30" required />
           <span class="popup__error nameAdd-input-error"></span>
           <input id="urlEdit-input" class="popup__input popup__input-description" type="url" name="link" value=""
-            placeholder="Ссылка на картинку" required>
+            placeholder="Ссылка на картинку" required />
           <span class="popup__error urlEdit-input-error"></span>
         </fieldset>
         <button class="popup__button">Создать</button>
@@ -72,14 +72,14 @@
     <div class="popup__container-picture">
       <figure class="popup__figure">
         <button class="popup__close" type="button"></button>
-        <img class="popup__img">
+        <img class="popup__img" />
         <figcaption class="popup__figure-caption"></figcaption>
       </figure>
     </div>
   </div>
   <template id="card">
     <div class="element">
-      <img class="element__img">
+      <img class="element__img" />
       <button class="element__delete" type="button"></button>
       <div class="element__caption">
         <h3 class="element__title"></h3>

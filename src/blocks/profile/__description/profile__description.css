@@ -1,7 +1,7 @@
 .profile__description {
   font-size: 18px;
   line-height: 22px;
-  color: #FFFFFF;
+  color: #ffffff;
   margin: 8px 0 0 0;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -15,4 +15,3 @@
     line-height: 17px;
   }
 }
-
