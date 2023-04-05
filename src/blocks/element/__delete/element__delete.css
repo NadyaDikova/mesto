@@ -10,7 +10,7 @@
   position: absolute;
   top: 20px;
   left: 244px;
-  background: url(../../../images/delete-button.svg);
+  background: url(../../../images/delete_button.svg);
 }
 
 .element__delete:hover {
