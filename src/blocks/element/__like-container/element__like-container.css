@@ -1,0 +1,10 @@
+.element__like-container {
+  display: flex;
+  align-self: center;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: auto;
+  overflow: visible;
+  min-height: 35px;
+  min-width: 22px;
+}

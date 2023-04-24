@@ -16,7 +16,9 @@
   </header>
   <main class="content">
     <section class="profile">
-      <img class="profile__avatar" src="<%=require('./images/avatar.png')%>" alt="Фото-аватар" />
+      <button class="profile__avatar-edit">
+        <img class="profile__avatar" src="<%=require('./images/avatar.png')%>" alt="Фото-аватар" />
+      </button>
       <div class="profile__info">
         <div class="profile__name-container">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -43,7 +45,7 @@
           <input id="nameEdit-input" class="popup__input popup__input-name" type="text" name="name" value="Жак-Ив Кусто"
             minlength="2" maxlength="40" required />
           <span class="popup__error nameEdit-input-error"></span>
-          <input id="jobEdit-input" class="popup__input popup__input-description" type="text" name="aboutSelf"
+          <input id="jobEdit-input" class="popup__input popup__input-description" type="text" name="about"
             value="Исследователь океана" minlength="2" maxlength="200" required />
           <span class="popup__error jobEdit-input-error"></span>
         </fieldset>
@@ -77,13 +79,39 @@
       </figure>
     </div>
   </div>
+  <div class="popup popup_type_delete">
+    <div class="popup__container">
+      <button class="popup__close" type="button"></button>
+      <h2 class="popup__title popup__title_delete">Вы уверены?</h2>
+      <form class="popup__form" name="deleteCard">
+        <button class="popup__button popup__button_delete" type="submit">Да</button>
+      </form>
+    </div>
+  </div>
+  <div class="popup popup_type_avatar">
+    <div class="popup__container">
+      <button class="popup__close" type="button"></button>
+      <h2 class="popup__title">Обновить аватар</h2>
+      <form novalidate class="popup__form" name="form-avatar">
+        <fieldset class="popup__fieldset">
+          <input id="urlAvatar-input" class="popup__input popup__input-avatar" type="url" name="avatar" value=""
+            placeholder="Ссылка на картинку" required />
+          <span class="popup__error urlAvatar-input-error"></span>
+          <button class="popup__button" type="submit">Сохранить</button>
+        </fieldset>
+      </form>
+    </div>
+  </div>
   <template id="card">
     <div class="element">
       <img class="element__img" />
       <button class="element__delete" type="button"></button>
       <div class="element__caption">
         <h3 class="element__title"></h3>
-        <button class="element__like" type="button"></button>
+        <div class="element__like-container">
+          <button class="element__like" type="button"></button>
+          <span class="element__like-quantity"></span>
+        </div>
       </div>
     </div>
   </template>
