@@ -96,7 +96,7 @@ const popupAdd = new PopupWithForm({
       console.log(error);
     })
     .finally(() => {
-      popupAdd.loadingSave(true);
+      popupAdd.loadingSave(false);
     });
   },
 });
@@ -151,7 +151,7 @@ function zoomImg(name, link) {
 //функция лайка
 function likeCard (id, cardElement) {
   api
-  .toLike(id)
+  .addLike(id)
   .then ((res) => {
     cardElement.toggleLike(res);
   })

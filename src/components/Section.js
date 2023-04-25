@@ -1,8 +1,8 @@
 //управляет разметкой других классов, вставляя её в DOM
 export default class Section {
-  constructor({ renderer }, containerSelector) {
+  constructor({ renderer }, container) {
     this._renderer = renderer; // функция
-    this._containerSelector = document.querySelector(containerSelector); // селектор контейнера в который нужно добавить созданные элементы
+    this._container = document.querySelector(container); // селектор контейнера в который нужно добавить созданные элементы
   }
 
   //отрисовка всех элементов
@@ -14,6 +14,6 @@ export default class Section {
 
   //принимает DOM элемент и добавляет в контейнер
   addItem(element) {
-    this._containerSelector.prepend(element);
+    this._container.prepend(element);
   }
 }
